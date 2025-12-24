@@ -8,7 +8,7 @@ A robust, production-ready backend API for managing vehicle rental operations. B
 [![Express.js](https://img.shields.io/badge/Express.js-000000?style=flat&logo=express&logoColor=white)](https://expressjs.com/)
 
 🌐 **Live Demo:** [Coming Soon]  
-📦 **Repository:** [GitHub Link]
+📦 **Repository:** [https://github.com/cgrashedflra/Vehicle-rental-system-api.git]
 
 ---
 
