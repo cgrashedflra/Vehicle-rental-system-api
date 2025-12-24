@@ -360,5 +360,6 @@ jobs:
 - PostgreSQL community for the robust database
 - TypeScript team for type safety
 - Free Massive LLM Army GPT, Gemini & Claude
+- Programming Hero
 
 ---
