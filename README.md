@@ -7,7 +7,7 @@ A robust, production-ready backend API for managing vehicle rental operations. B
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=flat&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![Express.js](https://img.shields.io/badge/Express.js-000000?style=flat&logo=express&logoColor=white)](https://expressjs.com/)
 
-🌐 **Live Demo:** [Coming Soon]  
+🌐 **Live Demo:** [https://vehicle-rental-system-api-amber.vercel.app/]  
 📦 **Repository:** [https://github.com/cgrashedflra/Vehicle-rental-system-api.git]
 
 ---
