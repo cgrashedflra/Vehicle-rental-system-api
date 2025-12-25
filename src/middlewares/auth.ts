@@ -5,37 +5,46 @@ import { catchAsync } from "../utils/catchAsync";
 import { sendResponse } from "../utils/sendResponse";
 import { ApiError } from "../utils/ApiError";
 
-const auth = (...roles: string[]) => {
+type Role = "customer" | "admin";
+
+interface DecodedToken {
+  id: number;
+  role: Role;
+}
+
+const auth = (...roles: Role[]) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const authHeader = req.headers.authorization;
 
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
-      throw new ApiError(401, "You are not Authorized")
+      throw new ApiError(401, "You are not authorized");
     }
 
-    const token = authHeader.split(" ")[1];
+    const tokenPart = authHeader.split(" ")[1];
+    if (!tokenPart) {
+      throw new ApiError(401, "Token missing");
+    }
 
-    let decoded: jwt.JwtPayload;
+    const token: string = tokenPart;
+
+    let decoded: DecodedToken;
 
     try {
-      decoded = jwt.verify(
-        token,
-        config.jwtSecret as string
-      ) as unknown as jwt.JwtPayload;
+      const result = jwt.verify(token, config.jwtSecret);
+
+      if (typeof result === "string") {
+        throw new ApiError(401, "Invalid token");
+      }
+
+      decoded = {
+        id: result.id as number,
+        role: result.role as Role,
+      };
     } catch {
-      throw new ApiError(401, "Invalid or expired token")
+      throw new ApiError(401, "Invalid or expired token");
     }
 
-    if (!decoded.id || !decoded.role) {
-      return sendResponse(res, {
-        statusCode: 401,
-        message: "Invalid token payload",
-      });
-    }
-    req.user = {
-      id: decoded.id as number,
-      role: decoded.role as "customer" | "admin",
-    };
+    req.user = decoded;
 
     if (roles.length && !roles.includes(req.user.role)) {
       return sendResponse(res, {
@@ -49,4 +58,3 @@ const auth = (...roles: string[]) => {
 };
 
 export default auth;
-

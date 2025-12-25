@@ -3,11 +3,26 @@ import path from "path";
 
 dotenv.config({ path: path.join(process.cwd(), ".env") });
 
-const config = {
-  connection_str: process.env.CONNECTION_STR,
-  port: process.env.PORT,
-jwtSecret: process.env.JWT_SECRET,
-cron_Secret: process.env.CRON_SECRET
+interface AppConfig {
+  connection_str: string;
+  port: number;
+  jwtSecret: string;
+  cron_Secret: string;
+}
+
+const getEnv = (key: string): string => {
+  const value = process.env[key];
+  if (!value) {
+    throw new Error(`Missing environment variable: ${key}`);
+  }
+  return value;
+};
+
+const config: AppConfig = {
+  connection_str: getEnv("CONNECTION_STR"),
+  port: Number(getEnv("PORT")),
+  jwtSecret: getEnv("JWT_SECRET"),
+  cron_Secret: getEnv("CRON_SECRET"),
 };
 
 export default config;
