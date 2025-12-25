@@ -86,7 +86,7 @@ src/
 
 1. **Clone the repository**
    ```bash
-   git clone [your-repository-url]
+   git clone [https://github.com/cgrashedflra/Vehicle-rental-system-api]
    cd vehicle-rental-api
    ```
 
@@ -356,10 +356,10 @@ jobs:
 
 ## 🙏 Acknowledgments
 
+- Programming Hero
 - Express.js team for the amazing framework
 - PostgreSQL community for the robust database
 - TypeScript team for type safety
 - Free Massive LLM Army GPT, Gemini & Claude
-- Programming Hero
 
 ---
